@@ -72,6 +72,18 @@ If you use PSORTb in your work, please cite:
 > **Bioinformatics**, 26(13): 1608–1615.  
 > [https://doi.org/10.1093/bioinformatics/btq249](https://doi.org/10.1093/bioinformatics/btq249)
 
+**PSORTb Docker Wrapper** is part of the **FastProtein** project  
+👉 [https://github.com/labioinfoufsc/FastProtein](https://github.com/labioinfoufsc/FastProtein)
+
+If this utility has been useful in your research or contributed in any way to your work, please cite the repository and the following publication:
+
+> Moreira RS, Benetti Filho V, Maia GA, Soratto TAT, Kawagoe EK, Russi BC, Miletti LC, Wagner G.  
+> **FastProtein—an automated software for in silico proteomic analysis.**  
+> *PeerJ* 12:e18309 (2024).  
+> [https://doi.org/10.7717/peerj.18309](https://doi.org/10.7717/peerj.18309)
+
+👉 Repository: [https://github.com/bioinfoufsc/PSORTb](https://github.com/bioinfoufsc/PSORTb)
+
 ---
 
 ## Notes
