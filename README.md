@@ -1,4 +1,4 @@
-# PSortb Docker Wrapper
+# PSORTb Docker Wrapper
 
 This repository provides a **Docker container** that wraps the **PSORTb** program for bacterial protein subcellular localization prediction.  
 
