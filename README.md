@@ -34,11 +34,16 @@ docker build -t bioinfoufsc/psortb -f PSORTb/Dockerfile PSORTb/
 ## Usage
 
 ### Run PSORTb for gram positive bacterial proteins
+See the params:
+```
+docker run --rm bioinfoufsc/psortb -h
+```
+
 
 Run the first 100 proteins of the [Clostridium botulinum proteome](https://www.uniprot.org/proteomes/UP000001986):
 
 ```bash
-docker run --rm -v ${PWD}:/data/ bioinfoufsc/psortb -p -o terse -i /data/examples/gram_positive.fasta -r /data/examples/gram_positive.txt
+docker run --rm -v ${PWD}/PSORTb:/data/ bioinfoufsc/psortb -p -o terse -i /data/examples/gram_positive.fasta -r /data/examples/gram_positive.txt
 ```
 
 ### Run PSORTb for gram negative bacterial proteins
@@ -46,7 +51,7 @@ docker run --rm -v ${PWD}:/data/ bioinfoufsc/psortb -p -o terse -i /data/example
 Run the first 100 proteins of the [Borreliella burgdorferi  proteome](https://www.uniprot.org/proteomes/UP000001807):
 
 ```bash
-docker run --rm -v ${PWD}:/data/ labioinfoufsc/psortb -n -o terse -i /data/examples/gram_negative.fasta -r /data/examples/gram_negative.txt
+docker run --rm -v ${PWD}/PSORTb:/data/ bioinfoufsc/psortb -n -o terse -i /data/examples/gram_negative.fasta -r /data/examples/gram_negative.txt
 ```
 
 **Notes:**
