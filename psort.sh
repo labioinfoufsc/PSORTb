@@ -99,7 +99,7 @@ PIDS=()
 cleanup() {
     local pid
 
-    for pid in "${PIDS[@]}"; do
+    for pid in ${PIDS[@]+"${PIDS[@]}"}; do
         kill "$pid" 2>/dev/null || true
     done
 
@@ -177,12 +177,12 @@ for (( i=1; i<=WORKERS; i++ )); do
 
     if (( VERBOSE )); then
         printf '  Command: %q ' \
-            "$PSORTB_SCRIPT" "${ARGS[@]}" "$BATCH"
+            "$PSORTB_SCRIPT" ${ARGS[@]+"${ARGS[@]}"} "$BATCH"
         echo
     fi
 
     (
-        "$PSORTB_SCRIPT" "${ARGS[@]}" "$BATCH" \
+        "$PSORTB_SCRIPT" ${ARGS[@]+"${ARGS[@]}"} "$BATCH" \
             > "$PART" 2> "$LOG"
     ) &
 
