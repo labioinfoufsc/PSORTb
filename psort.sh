@@ -181,22 +181,29 @@ for (( i=1; i<=WORKERS; i++ )); do
         echo
     fi
 
+    # Each batch records its own exit code: with bash 4.3 running as PID 1,
+    # "wait <pid>" can lose the status of children that already exited
+    # ("pid N is not a child of this shell") when many run in parallel.
     (
+        rc=0
         "$PSORTB_SCRIPT" ${ARGS[@]+"${ARGS[@]}"} "$BATCH" \
-            > "$PART" 2> "$LOG"
+            > "$PART" 2> "$LOG" || rc=$?
+        echo "$rc" > "$TMP_DIR/batch_${NUM}.status"
     ) &
 
     PIDS+=("$!")
 done
 
 # Wait for all PSORTb processes
+wait || true
 FAILED=0
 
 for (( i=1; i<=WORKERS; i++ )); do
 
     printf -v NUM '%06d' "$i"
+    STATUS="$(cat "$TMP_DIR/batch_${NUM}.status" 2>/dev/null || echo missing)"
 
-    if wait "${PIDS[i-1]}"; then
+    if [[ "$STATUS" == "0" ]]; then
 
         echo "[Batch $i/$WORKERS] Completed"
 
@@ -207,8 +214,8 @@ for (( i=1; i<=WORKERS; i++ )); do
 
     else
 
-        echo "[Batch $i/$WORKERS] Failed (PSORTb error)" >&2
-        cat "$TMP_DIR/batch_${NUM}.log" >&2
+        echo "[Batch $i/$WORKERS] Failed (PSORTb exit status: $STATUS)" >&2
+        cat "$TMP_DIR/batch_${NUM}.log" >&2 2>/dev/null || true
         FAILED=1
 
     fi
